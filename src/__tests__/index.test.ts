@@ -3,8 +3,8 @@ import app from '../index';
 
 describe('server app', () => {
   afterEach(() => {
-    app.close()
-  })
+    app.close();
+  });
 
   test('should respond 200 on index route', () =>
     request(app).get('/').expect(200));
