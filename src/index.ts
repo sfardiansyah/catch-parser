@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import fetchOrders from './api';
+
+import fetchAndTransform from './service';
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => res.send('Hello from Catch JSONL Parser!'));
 
-fetchOrders();
+fetchAndTransform();
 
 const server = app.listen(port, () => {
   // eslint-disable-next-line no-console
