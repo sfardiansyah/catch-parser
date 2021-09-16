@@ -92,5 +92,20 @@ describe('service', () => {
       expect(mockedWriteStream.write).toHaveBeenNthCalledWith(3, csvParsedStr);
       expect(mockedWriteStream.write).toHaveBeenNthCalledWith(4, csvParsedStr);
     });
+
+    test('should not write records which have 0 total order value', () => {
+      const zeroOrderValue: OrderSummary = { ...summary, total_order_value: 0 };
+      const parser = new Transform();
+
+      mockedJsonlines.parse.mockReturnValue(parser);
+      mockedSummarize.mockReturnValue(zeroOrderValue);
+
+      service();
+
+      parser.emit('data', '{"response": "ok"}');
+      parser.emit('end');
+
+      expect(mockedWriteStream.write).toHaveBeenCalledTimes(1);
+    });
   });
 });

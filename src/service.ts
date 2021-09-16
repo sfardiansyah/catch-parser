@@ -18,7 +18,8 @@ export default async () => {
   parser.on('data', (record: OrderRecord) => {
     const summary = summarizeOrder(record);
 
-    fileStream.write(`${Object.values(summary).join(',')}\n`);
+    if (summary.total_order_value)
+      fileStream.write(`${Object.values(summary).join(',')}\n`);
   });
 
   const response = await fetchFile();
