@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { OrderRecord, OrderSummary, Item, Discount } from './types';
 
-const calculateOrderValue = (items: Item[], discounts: Discount[]) => {
+export const calculateOrderValue = (items: Item[], discounts: Discount[]) => {
   const total = items.reduce(
     (sum, { unit_price, quantity }) => sum + unit_price * quantity,
     0
@@ -20,7 +20,7 @@ const calculateOrderValue = (items: Item[], discounts: Discount[]) => {
   return parseFloat(totalWithDiscounts.toFixed(2));
 };
 
-const calculateAverageUnitPrice = (items: Item[]) => {
+export const calculateAverageUnitPrice = (items: Item[]) => {
   let price = 0;
   let units = 0;
 
@@ -32,7 +32,7 @@ const calculateAverageUnitPrice = (items: Item[]) => {
   return parseFloat((price / units).toFixed(2));
 };
 
-const parseDateToISO = (date: string) =>
+export const parseDateToISO = (date: string) =>
   moment(date, 'ddd, DD MMM YYYY HH:mm:ss Z').toISOString();
 
 const summarizeOrder = ({

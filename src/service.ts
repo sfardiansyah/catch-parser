@@ -6,7 +6,7 @@ import { OrderRecord } from './types';
 import summarizeOrder from './summarize';
 
 export default async () => {
-  const fileStream = fs.createWriteStream(`out.csv`);
+  const fileStream = fs.createWriteStream(`download/out.csv`);
   const parser = jsonlines.parse();
 
   parser.once('data', (record: OrderRecord) => {
